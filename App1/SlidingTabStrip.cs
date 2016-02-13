@@ -87,7 +87,7 @@ namespace Scouter
             }
         }
 
-        public int[] SelectedDividerColors
+        public int[] DividerColors
         {
             set
             {
