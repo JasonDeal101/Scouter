@@ -18,6 +18,17 @@ namespace Scouter
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            SlidingTabsFragment STF = new SlidingTabsFragment();
+            transaction.Replace(Resource.Id.sample_content_fragment, STF);
+            transaction.Commit();
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.actionbar_main, menu);
+            return base.OnCreateOptionsMenu(menu);
         }
     }
 }

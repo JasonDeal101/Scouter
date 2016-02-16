@@ -35,8 +35,8 @@ namespace Scouter
 
         public interface TabColorizer
         {
-            int GetIndicatorColors(int pos);
-            int GetDividerColors(int pos);
+            int GetIndicatorColor(int position);
+            int GetDividerColor(int position);
         }
 
         //Constuctors
@@ -59,7 +59,7 @@ namespace Scouter
 
         public TabColorizer CustomTabColorizer
         {
-            set { mTabStrip.customTabColorizer = value; }
+            set { mTabStrip.CustomTabColorizer = value; }
         }
 
         public int[] SelectedIndicatorColor
@@ -89,6 +89,7 @@ namespace Scouter
                     value.PageSelected += Value_PageSelected;
                     value.PageScrollStateChanged += Value_PageScrollStateChanged;
                     value.PageScrolled += Value_PageScrolled;
+                    PopulateTabStrip();
                 }
             }
         }
@@ -103,7 +104,7 @@ namespace Scouter
                 return;
             }
 
-            mTabStrip.OnViewPagerPage(e.Position, e.PositionOffset);
+            mTabStrip.OnViewPagerPageChanged(e.Position, e.PositionOffset);
 
             View SelectedTitle = mTabStrip.GetChildAt(e.Position);
 
@@ -131,7 +132,7 @@ namespace Scouter
         {
             if(mScrollState == ViewPager.ScrollStateIdle)
             {
-                mTabStrip.OnViewPagerPage(e.Position, 0f);
+                mTabStrip.OnViewPagerPageChanged(e.Position, 0f);
                 ScrollToTab(e.Position, 0);
             }
             if(mViewPagerPageChangeListener != null)
@@ -146,7 +147,7 @@ namespace Scouter
             for(int i = 0;  i < adapter.Count; i++)
             {
                 TextView tabView = CreateDefaultTabView(Context);
-                tabView.Text = i.ToString();
+                tabView.Text = ((SlidingTabsFragment.SamplePagerAdpter)adapter).GetHeaderTitle(i);
                 tabView.SetTextColor(Android.Graphics.Color.Black);
                 tabView.Tag = i;
                 tabView.Click += TabView_Click;
