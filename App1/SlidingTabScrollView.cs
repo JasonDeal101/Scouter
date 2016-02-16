@@ -104,16 +104,100 @@ namespace Scouter
             }
 
             mTabStrip.OnViewPagerPage(e.Position, e.PositionOffset);
+
+            View SelectedTitle = mTabStrip.GetChildAt(e.Position);
+
+            int extraOffset = (SelectedTitle != null ? (int)(e.Position * SelectedTitle.Width) : 0);
+
+            ScrollToTab(e.Position, extraOffset);
+
+            if(mViewPagerPageChangeListener != null)
+            {
+                mViewPagerPageChangeListener.OnPageScrolled(e.Position, e.PositionOffset, e.PositionOffsetPixels);
+            }
         }
 
         private void Value_PageScrollStateChanged(object sender, ViewPager.PageScrollStateChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            mScrollState = e.State;
+
+            if(mViewPagerPageChangeListener != null)
+            {
+                mViewPagerPageChangeListener.OnPageScrollStateChanged(e.State);
+            }
         }
 
         private void Value_PageSelected(object sender, ViewPager.PageSelectedEventArgs e)
         {
+            if(mScrollState == ViewPager.ScrollStateIdle)
+            {
+                mTabStrip.OnViewPagerPage(e.Position, 0f);
+                ScrollToTab(e.Position, 0);
+            }
+            if(mViewPagerPageChangeListener != null)
+            {
+                mViewPagerPageChangeListener.OnPageSelected(e.Position);
+            }
+        }
+
+        private void PopulateTabStrip()
+        {
+            PagerAdapter adapter = mViewPager.Adapter;
+            for(int i = 0;  i < adapter.Count; i++)
+            {
+                TextView tabView = CreateDefaultTabView(Context);
+                tabView.Text = i.ToString();
+                tabView.SetTextColor(Android.Graphics.Color.Black);
+                tabView.Tag = i;
+                tabView.Click += TabView_Click;
+                mTabStrip.AddView(tabView);
+            }
+        }
+
+        private void TabView_Click(object sender, EventArgs e)
+        {
+            TextView clickTab = (TextView)sender;
+            int pageToScrollTo = (int)clickTab.Tag;
+            mViewPager.CurrentItem = pageToScrollTo;
+        }
+
+        private TextView CreateDefaultTabView(Context context)
+        {
             throw new NotImplementedException();
+        }
+
+        protected override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+
+            if(mViewPager != null)
+            {
+                ScrollToTab(mViewPager.CurrentItem, 0);
+            }
+        }
+
+        private void ScrollToTab(int pos, int offset)
+        {
+            int tabCount = mTabStrip.ChildCount;
+
+            if (tabCount == 0 || pos < 0 || pos >= tabCount)
+            {
+                //No need to go further
+                return;
+            }
+
+            View selectedChild = mTabStrip.GetChildAt(pos);
+            if(selectedChild != null)
+            {
+                int scrollAmountX = selectedChild.Left + offset;
+
+                if(pos > 0 || offset > 0)
+                {
+                    scrollAmountX -= mTitleOffset;
+                }
+
+                this.ScrollTo(scrollAmountX, 0);
+            }
         }
     }
 }
