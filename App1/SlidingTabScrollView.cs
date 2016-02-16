@@ -163,7 +163,26 @@ namespace Scouter
 
         private TextView CreateDefaultTabView(Context context)
         {
-            throw new NotImplementedException();
+            TextView tView = new TextView(context);
+            tView.Gravity = GravityFlags.Center;
+            tView.SetTextSize(ComplexUnitType.Sp, TAB_VIEW_TEXT_SIZE_SP);
+            tView.Typeface = Android.Graphics.Typeface.DefaultBold;
+            if(Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
+            {
+                TypedValue outVal = new TypedValue();
+                context.Theme.ResolveAttribute(Android.Resource.Attribute.SelectableItemBackground, outVal, false);
+                tView.SetBackgroundResource(outVal.ResourceId);
+            }
+
+            if(Build.VERSION.SdkInt >= BuildVersionCodes.IceCreamSandwich)
+            {
+                tView.SetAllCaps(true);
+            }
+
+            int padding = (int)(TAB_VIEW_PADDING_DIPS * Resources.DisplayMetrics.Density);
+            tView.SetPadding(padding, padding, padding, padding);
+
+            return tView;
         }
 
         protected override void OnAttachedToWindow()
