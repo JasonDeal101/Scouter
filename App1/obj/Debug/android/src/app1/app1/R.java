@@ -14,7 +14,6 @@ public final class R {
         public static final int ic_action_overflow=0x7f020000;
         public static final int icon=0x7f020001;
         public static final int monoandroidsplash=0x7f020002;
-        public static final int xs=0x7f020003;
     }
     public static final class id {
         public static final int item_subtitle=0x7f070004;
@@ -38,6 +37,12 @@ public final class R {
         public static final int Hello=0x7f040000;
     }
     public static final class style {
+        /**  the theme applied to the application or activity 
+         */
+        public static final int CustomActionBarTheme=0x7f050001;
         public static final int Mono_Android_Theme_Splash=0x7f050000;
+        /**  ActionBar styles 
+         */
+        public static final int MyActionBar=0x7f050002;
     }
 }

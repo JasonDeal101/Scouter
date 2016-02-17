@@ -53,9 +53,6 @@ namespace Scouter
 			// aapt resource value: 0x7f020002
 			public const int monoandroidsplash = 2130837506;
 			
-			// aapt resource value: 0x7f020003
-			public const int xs = 2130837507;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -160,8 +157,14 @@ namespace Scouter
 		public partial class Style
 		{
 			
+			// aapt resource value: 0x7f050001
+			public const int CustomActionBarTheme = 2131034113;
+			
 			// aapt resource value: 0x7f050000
 			public const int Mono_Android_Theme_Splash = 2131034112;
+			
+			// aapt resource value: 0x7f050002
+			public const int MyActionBar = 2131034114;
 			
 			static Style()
 			{

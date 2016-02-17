@@ -49,7 +49,7 @@ namespace Scouter
 
             //Make sure tab strips fill view
             FillViewport = true;
-            this.SetBackgroundColor(Android.Graphics.Color.Gray);
+            this.SetBackgroundColor(Android.Graphics.Color.White);
 
             mTitleOffset = (int)(TITLE_OFFSET_DIPS * Resources.DisplayMetrics.Density);
 
