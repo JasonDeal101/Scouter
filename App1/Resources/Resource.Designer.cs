@@ -66,20 +66,35 @@ namespace Scouter
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f070006
+			public const int emailFile = 2131165190;
+			
 			// aapt resource value: 0x7f070004
-			public const int item_subtitle = 2131165188;
+			public const int fileName = 2131165188;
+			
+			// aapt resource value: 0x7f070009
+			public const int item_subtitle = 2131165193;
+			
+			// aapt resource value: 0x7f07000a
+			public const int item_title = 2131165194;
 			
 			// aapt resource value: 0x7f070005
-			public const int item_title = 2131165189;
+			public const int matchNumber = 2131165189;
 			
-			// aapt resource value: 0x7f070006
-			public const int menu = 2131165190;
+			// aapt resource value: 0x7f07000b
+			public const int menu = 2131165195;
 			
 			// aapt resource value: 0x7f070003
 			public const int sample_content_fragment = 2131165187;
 			
 			// aapt resource value: 0x7f070002
 			public const int sample_main_layout = 2131165186;
+			
+			// aapt resource value: 0x7f070008
+			public const int saveCSVToSD = 2131165192;
+			
+			// aapt resource value: 0x7f070007
+			public const int saveRawToSD = 2131165191;
 			
 			// aapt resource value: 0x7f070000
 			public const int sliding_tabs = 2131165184;
@@ -107,7 +122,10 @@ namespace Scouter
 			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int pager_item = 2130903042;
+			public const int options_item = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int pager_item = 2130903043;
 			
 			static Layout()
 			{

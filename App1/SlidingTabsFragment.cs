@@ -39,20 +39,20 @@ namespace Scouter
 
         public class SamplePagerAdpter : PagerAdapter
         {
-            List<string> items = new List<string>();
+            List<string> files = new List<string>();
 
             public SamplePagerAdpter() : base()
             {
-                items.Add("Xamarin");
-                items.Add("Android");
-                items.Add("Example");
+                files.Add("28511");
+                files.Add("28512");
+                files.Add("28513");
             }
 
             public override int Count
             {
                 get
                 {
-                    return items.Count;
+                    return files.Count;
                 }
             }
 
@@ -63,19 +63,60 @@ namespace Scouter
 
             public override Java.Lang.Object InstantiateItem(ViewGroup container, int position)
             {
-                View view = LayoutInflater.From(container.Context).Inflate(Resource.Layout.pager_item, container, false);
+                //Sets view equal to options_item
+                View view = LayoutInflater.From(container.Context).Inflate(Resource.Layout.options_item, container, false);
                 container.AddView(view);
 
-                TextView title = view.FindViewById<TextView>(Resource.Id.item_title);
-                int pos = position + 1;
-                title.Text = pos.ToString();
+                char[] titleChar = files[position].ToCharArray();
+                char[] teamNumberChar = new char[4];
+                //string matchNumber = teamNumberChar[3].ToString();
+                for(int i = 0; i <= titleChar.Length; i++)
+                {
+                    if(i < 4)
+                    {
+                        teamNumberChar[i] = titleChar[i];
+                    }
+                }
+
+                string teamNumber = new string(teamNumberChar);
+
+                //Create objects for items on the options_item layout
+                TextView title = view.FindViewById<TextView>(Resource.Id.fileName);
+                TextView txtMatchNumber = view.FindViewById<TextView>(Resource.Id.matchNumber);
+                Button email = view.FindViewById<Button>(Resource.Id.emailFile);
+                Button saveRaw = view.FindViewById<Button>(Resource.Id.saveRawToSD);
+                Button saveCSV = view.FindViewById<Button>(Resource.Id.saveCSVToSD);
+
+                title.Text = "Team Number: " + teamNumber;
+                txtMatchNumber.Text = "Match Number: " + teamNumberChar[3].ToString();
+                email.Click += Email_Click;
+                saveRaw.Click += SaveRaw_Click;
+                saveCSV.Click += SaveCSV_Click;
 
                 return view;
             }
 
+            private void SaveCSV_Click(object sender, EventArgs e)
+            {
+                //Saves file as a .csv(comma seperated values) file on the external sd card
+                throw new NotImplementedException();
+            }
+
+            private void SaveRaw_Click(object sender, EventArgs e)
+            {
+                //Saves the raw file to the external sd card
+                throw new NotImplementedException();
+            }
+
+            private void Email_Click(object sender, EventArgs e)
+            {
+                //Emails the file to wherever
+                throw new NotImplementedException();
+            }
+
             public string GetHeaderTitle(int pos)
             {
-                return items[pos];
+                return files[pos];
             }
 
             public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object obj)
