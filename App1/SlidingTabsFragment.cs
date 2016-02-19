@@ -1,17 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
-using Java.Lang;
 
 namespace Scouter
 {
@@ -68,16 +61,23 @@ namespace Scouter
                 container.AddView(view);
 
                 char[] titleChar = files[position].ToCharArray();
-                char[] teamNumberChar = new char[4];
-                //string matchNumber = teamNumberChar[3].ToString();
-                for(int i = 0; i <= titleChar.Length; i++)
+                char[] teamNumberChar = new char[5];
+                char matchNumber;
+
+                for (int i = 0; i <= titleChar.Length; i++)
                 {
-                    if(i < 4)
+                    if (i < 4)
                     {
                         teamNumberChar[i] = titleChar[i];
                     }
+                    else
+                    {
+                        //matchNumber = titleChar[i];
+                        break;
+                    }
                 }
 
+                matchNumber = titleChar[4];
                 string teamNumber = new string(teamNumberChar);
 
                 //Create objects for items on the options_item layout
@@ -88,7 +88,7 @@ namespace Scouter
                 Button saveCSV = view.FindViewById<Button>(Resource.Id.saveCSVToSD);
 
                 title.Text = "Team Number: " + teamNumber;
-                txtMatchNumber.Text = "Match Number: " + teamNumberChar[3].ToString();
+                txtMatchNumber.Text = "Match Number: " + matchNumber.ToString();
                 email.Click += Email_Click;
                 saveRaw.Click += SaveRaw_Click;
                 saveCSV.Click += SaveCSV_Click;

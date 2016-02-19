@@ -12,17 +12,17 @@ using Android.Widget;
 
 namespace Scouter.FileManagment
 {
-    class EmailManager
+    class EmailManager : Activity
     {
-        string mFilePath;
-        string mEmail;
-        Intent mMail = new Intent(Android.Content.Intent.ActionSend);
-        public EmailManager(string filePath, string email)
+        Intent mMail = new Intent(Intent.ActionSend);
+        
+        public EmailManager(string filePath, string email, string teamNum, string matchNum)
         {
-            mFilePath = filePath;
-            mEmail = email;
-            
-            
+            mMail.PutExtra(Intent.ExtraEmail, email);//Sets Adressee
+            mMail.PutExtra(Intent.ExtraSubject, "Team: " + teamNum + " Match: " + matchNum);//Sets subject
+            mMail.SetType("message/rfc822");//Opens a mail application
+            StartActivity(mMail);//Starts the mail intent
         }
+
     }
 }
