@@ -20,8 +20,8 @@ namespace Scouter
             SetContentView(Resource.Layout.Main);
 
             //Sets the sliding tab fragment within the frame layout
-            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            SlidingTabsFragment STF = new SlidingTabsFragment();
+            var transaction = FragmentManager.BeginTransaction();
+            var STF = new SlidingTabsFragment();
             transaction.Replace(Resource.Id.sample_content_fragment, STF);
             transaction.Commit();
         }

@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
+using System.IO;
 
 namespace Scouter
 {
@@ -27,7 +28,6 @@ namespace Scouter
             mVP.Adapter = new SamplePagerAdpter();
 
             mSlidingTabScrollView.ViewPager = mVP;
-
         }
 
         public class SamplePagerAdpter : PagerAdapter
@@ -122,6 +122,19 @@ namespace Scouter
             public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object obj)
             {
                 container.RemoveView((View)obj);
+            }
+
+            private string[] GetFiles()
+            {
+                //Receives all file names from the Documents Directory
+                string[] files = Directory.GetFiles(Android.OS.Environment.DirectoryDocuments);
+                return files;
+            }
+
+            private void WriteFile(string contents)
+            {
+                var path = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments);
+
             }
         }
     }
